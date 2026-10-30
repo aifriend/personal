@@ -6,9 +6,10 @@ import { researchRows } from '../lib/research-rows';
 const rows = researchRows;
 const themeCount = new Set(rows.map((r) => r.group)).size;
 
-// Find which slugs have a real Markdown document
+// Find which slugs have a real Markdown document, and their status
 const docs = await getCollection('research');
 const writtenSlugs = new Set(docs.map((d) => d.id));
+const statusBySlug = new Map(docs.map((d) => [d.id, d.data.status]));
 ---
 
 <section id="research" class="px-8 sm:px-14 pt-[100px] pb-[120px] relative z-10">
@@ -23,11 +24,12 @@ const writtenSlugs = new Set(docs.map((d) => d.id));
           <span class="hidden sm:block font-mono text-[11px] opacity-60 tracking-[0.15em] uppercase">{row.group}</span>
           <span class="font-serif italic font-normal text-[22px] sm:text-[30px]">{row.title}</span>
           <span class="hidden sm:block font-mono text-[10px] tracking-[0.15em] uppercase opacity-55">/ {row.kind}</span>
+          <span class="hidden lg:block font-mono text-[10px] tracking-[0.15em] uppercase opacity-45">{statusBySlug.get(row.slug) ?? ''}</span>
           <span class="fn-research-arrow text-2xl text-right">{written ? '→' : '·'}</span>
         </>
       );
 
-      const baseGrid = `fn-research-row grid grid-cols-[40px_1fr_30px] sm:grid-cols-[60px_180px_1fr_120px_32px] items-baseline py-6 gap-4 sm:gap-6`;
+      const baseGrid = `fn-research-row grid grid-cols-[40px_1fr_30px] sm:grid-cols-[60px_180px_1fr_120px_90px_32px] items-baseline py-6 gap-4 sm:gap-6`;
 
       return (
         <li class={row.hoverBg}>

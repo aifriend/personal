@@ -5,6 +5,7 @@ kind: practice
 status: in-progress
 updated: 2026-05-03
 summary: Following Alan Wallace's syllabus into shamatha. Notes from inside the work.
+source: B. Alan Wallace's The Attention Revolution (2006)
 ---
 
 # Your Focus is Your Reality: 5 Radical Lessons from the Science of Attention

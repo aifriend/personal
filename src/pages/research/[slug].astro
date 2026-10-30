@@ -69,6 +69,8 @@ const lang = entry.data.lang ?? 'en';
           <span class="block w-7 h-px bg-ink opacity-40"></span>
           <span>Research · {entry.data.group} · {entry.data.kind}</span>
           <span class="opacity-50">·</span>
+          <span>{entry.data.status}</span>
+          <span class="opacity-50">·</span>
           <span>{readingMinutes} min read · {wordCount.toLocaleString()} words</span>
         </div>
 
@@ -81,6 +83,18 @@ const lang = entry.data.lang ?? 'en';
           <p class="font-serif italic text-2xl leading-[1.5] text-ink-soft m-0 mb-14 -mt-4">
             {entry.data.summary}
           </p>
+        )}
+
+        {(entry.data.source || entry.data.code) && (
+          <div class="font-mono text-[11px] tracking-[0.15em] uppercase opacity-60 -mt-8 mb-14 flex flex-wrap items-center gap-x-4 gap-y-2">
+            {entry.data.source && <span>On {entry.data.source}</span>}
+            {entry.data.code && (
+              <a href={entry.data.code} target="_blank" rel="noopener noreferrer"
+                 class="text-accent no-underline hover:underline">
+                Code · {entry.data.code.replace('https://github.com/', 'github.com/')} →
+              </a>
+            )}
+          </div>
         )}
 
         <div class="fn-prose" lang={lang}>

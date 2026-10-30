@@ -1,51 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import SectionHeader from './SectionHeader.astro';
-
-// Importing photos from src/assets lets Astro auto-generate WebP/AVIF + responsive sizes.
-// The 22 MB PNG drops to ~600 KB at viewport width.
-import photo1 from '../assets/photos/photo-1.png';
-import photo2 from '../assets/photos/photo-2.png';
-import photo3 from '../assets/photos/photo-3.jpg';
-import photo4 from '../assets/photos/photo-4.jpg';
-
-interface Plate {
-  image: ImageMetadata;
-  no: string;
-  title: string;   // honest description of what's in the frame — not invented narrative
-  caption?: string; // used only where a factual note is genuinely true
-  serifSize: string;
-}
-
-// Titles describe what is actually in each photo. Captions were invented and
-// have been removed — add true ones in your own words later (see AUTHENTICITY-PASS.md).
-const plates: Plate[] = [
-  {
-    image: photo1,
-    no: '01',
-    title: 'A cross of carnations.',
-    serifSize: 'text-[26px]',
-  },
-  {
-    image: photo2,
-    no: '02',
-    title: 'Ferns at the base of a tree.',
-    serifSize: 'text-[24px]',
-  },
-  {
-    image: photo3,
-    no: '03',
-    title: 'A stone Christ.',
-    serifSize: 'text-[24px]',
-  },
-  {
-    image: photo4,
-    no: '04',
-    title: 'Pluto.',
-    caption: "New Horizons, NASA — the one picture here I didn't take.",
-    serifSize: 'text-[24px]',
-  },
-];
+import { plates } from '../lib/plates';
 ---
 
 <section id="photos" class="px-8 sm:px-14 pt-[120px] pb-20 relative z-10">
@@ -61,7 +17,7 @@ const plates: Plate[] = [
             loading="lazy"
             widths={[480, 800, 1200]}
             sizes="(min-width: 1100px) 540px, (min-width: 640px) 50vw, 100vw"
-            quality={85}
+            quality={80}
             format="webp"
             class="w-full h-auto block"
           />
@@ -79,7 +35,7 @@ const plates: Plate[] = [
   </div>
 
   <div class="mt-14 text-right max-w-[1100px] mx-auto">
-    <a href="https://www.instagram.com/joseafdlopez/" target="_blank" rel="noopener noreferrer" class="font-serif italic text-xl fn-serif-link text-ink">
+    <a href="/photos" class="font-serif italic text-xl fn-serif-link text-ink">
       see all photographs →
     </a>
   </div>

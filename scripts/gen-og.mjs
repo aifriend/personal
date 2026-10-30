@@ -32,7 +32,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <text x="80" y="100" font-family="serif" font-size="32" font-style="italic" fill="#241e2a">Jose Lopez<tspan fill="#9a7bb8" dx="14" font-style="normal">·</tspan><tspan font-family="monospace" font-size="14" letter-spacing="2.5" fill="#241e2a" opacity="0.6" dx="14" font-style="normal">A PERSONAL INDEX</tspan></text>
 
   <line x1="80" y1="220" x2="120" y2="220" stroke="#241e2a" stroke-width="1" opacity="0.4"/>
-  <text x="135" y="225" font-family="monospace" font-size="13" letter-spacing="2.5" fill="#241e2a" opacity="0.65">MADRID &#183; SPRING &#183; MMXXVI</text>
+  <text x="135" y="225" font-family="monospace" font-size="13" letter-spacing="2.5" fill="#241e2a" opacity="0.65">MADRID &#183; AUTUMN &#183; MMXXVI</text>
 
   <text x="80" y="340" font-family="serif" font-size="96" font-weight="bold" fill="#241e2a" letter-spacing="-3">Serenity, courage,</text>
   <text x="80" y="452" font-family="serif" font-size="96" font-weight="bold" fill="#241e2a" letter-spacing="-3">and the <tspan font-style="italic" fill="#9a7bb8">wisdom</tspan> between.</text>

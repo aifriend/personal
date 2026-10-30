@@ -5,6 +5,7 @@ kind: in progress
 status: in-progress
 updated: 2026-05-03
 summary: The long thing I'm working on — and how I'm trying to keep it from breaking me.
+code: https://github.com/aifriend/geometric-signatures-proposal
 ---
 
 # Formalizing Neural Population Dynamics: A Five-Class Functional Motif Taxonomy

@@ -1,0 +1,44 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+// Jose's pinned repos on github.com/aifriend — descriptions are his own words.
+const works = [
+  { name: 'geometric-signatures-proposal', desc: 'PhD proposal — geometric signatures of computational motifs in neural populations.', lang: 'Python' },
+  { name: 'flappy-brain-bci', desc: 'Real-time motor-imagery EEG controller (CSP+LDA, LSL in, UDP out).', lang: 'Python' },
+  { name: 'f1-neuroevolution', desc: '80 AI cars learn racing via genetic algorithms.', lang: 'JavaScript' },
+  { name: 'emergence-sims', desc: 'Interactive simulation portfolio — emergence, minds, agents & markets.', lang: 'TypeScript' },
+  { name: 'doc_watermark_cleaner', desc: 'Conditional GAN (DE-GAN) for document image enhancement — watermark removal.', lang: 'Python' },
+  { name: 'atari57-sandbox', desc: 'Ready-to-run sandbox of deep RL (PyTorch DQN zoo) on Atari.', lang: 'Python' },
+];
+---
+
+<section id="works" class="px-8 sm:px-14 pt-[100px] pb-[120px] relative z-10">
+  <SectionHeader number="05" label="Works" title="Built," titleBreak="in public." />
+
+  <ul class="list-none p-0 m-0 border-t border-ink/13">
+    {works.map((w, i) => (
+      <li class="hover:bg-periwinkle/27">
+        <a href={`https://github.com/aifriend/${w.name}`} target="_blank" rel="noopener noreferrer"
+           class="fn-research-row grid grid-cols-[40px_1fr_30px] sm:grid-cols-[60px_1fr_140px_32px] items-baseline py-6 gap-4 sm:gap-6 no-underline text-ink">
+          <span class="font-mono text-[11px] opacity-50 tracking-wider">{String(i + 1).padStart(2, '0')}</span>
+          <span>
+            <span class="font-serif italic font-normal text-[22px] sm:text-[26px]">{w.name}</span>
+            <span class="block font-sans not-italic text-[13px] opacity-70 mt-1 leading-[1.5]">{w.desc}</span>
+          </span>
+          <span class="hidden sm:block font-mono text-[10px] tracking-[0.15em] uppercase opacity-55">{w.lang}</span>
+          <span class="fn-research-arrow text-2xl text-right">→</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="mt-9 flex flex-wrap justify-between items-baseline gap-4">
+    <span class="font-mono text-[11px] tracking-[0.15em] opacity-50 uppercase">
+      the pinned 6 · 40 public repos
+    </span>
+    <a href="https://github.com/aifriend" target="_blank" rel="me noopener noreferrer"
+       class="font-serif italic text-xl fn-serif-link text-ink">
+      github.com/aifriend →
+    </a>
+  </div>
+</section>

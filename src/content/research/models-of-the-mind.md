@@ -5,6 +5,7 @@ kind: theory
 status: in-progress
 updated: 2026-05-03
 summary: Notes on the theories I keep returning to — and why I haven't picked one.
+source: Grace Lindsay's Models of the Mind (2021)
 ---
 
 # The Architecture of Thought: Why Your Brain is Written in Calculus
