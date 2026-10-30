@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import SectionHeader from './SectionHeader.astro';
 import { plates } from '../lib/plates';
+import { href } from '../lib/base';
 ---
 
 <section id="photos" class="px-8 sm:px-14 pt-[120px] pb-20 relative z-10">
@@ -35,7 +36,7 @@ import { plates } from '../lib/plates';
   </div>
 
   <div class="mt-14 text-right max-w-[1100px] mx-auto">
-    <a href="/photos" class="font-serif italic text-xl fn-serif-link text-ink">
+    <a href={href('/photos')} class="font-serif italic text-xl fn-serif-link text-ink">
       see all photographs →
     </a>
   </div>

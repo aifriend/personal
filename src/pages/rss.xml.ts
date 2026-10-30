@@ -2,6 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 import { researchRows } from '../lib/research-rows';
+import { href } from '../lib/base';
 
 export async function GET(context: APIContext) {
   const entries = await getCollection('research');
@@ -23,7 +24,7 @@ export async function GET(context: APIContext) {
       description:
         entry.data.summary ??
         `${entry.data.group} · ${entry.data.kind}`,
-      link: `/research/${entry.id}/`,
+      link: href(`/research/${entry.id}/`),
       categories: [entry.data.group, entry.data.kind],
     })),
     customData: '<language>en-us</language>',

@@ -1,17 +1,19 @@
 ---
+import { href } from '../lib/base';
+
 // Absolute (/#…) so the links also work from /research/* subpages, not just home.
 const links = [
-  { id: 'photos',   href: '/#photos',   label: 'photos' },
-  { id: 'places',   href: '/#places',   label: 'places' },
-  { id: 'story',    href: '/#story',    label: 'story' },
-  { id: 'research', href: '/#research', label: 'research' },
-  { id: 'works',    href: '/#works',    label: 'works' },
-  { id: 'say-hi',   href: '/#say-hi',   label: 'say hi' },
+  { id: 'photos',   href: href('/#photos'),   label: 'photos' },
+  { id: 'places',   href: href('/#places'),   label: 'places' },
+  { id: 'story',    href: href('/#story'),    label: 'story' },
+  { id: 'research', href: href('/#research'), label: 'research' },
+  { id: 'works',    href: href('/#works'),    label: 'works' },
+  { id: 'say-hi',   href: href('/#say-hi'),   label: 'say hi' },
 ];
 ---
 
 <header class="sticky top-0 z-50 px-8 sm:px-14 py-7 flex justify-between items-center bg-cream/85 backdrop-blur-md border-b border-ink/10">
-  <a href="/" class="font-serif italic text-[22px] font-normal tracking-tight text-ink no-underline">
+  <a href={href('/')} class="font-serif italic text-[22px] font-normal tracking-tight text-ink no-underline">
     Jose Lopez
     <span class="text-accent mx-1.5">·</span>
     <span class="not-italic font-mono text-[11px] tracking-[0.15em] uppercase opacity-60">

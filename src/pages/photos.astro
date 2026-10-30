@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import { plates } from '../lib/plates';
+import { href } from '../lib/base';
 ---
 
 <Base
@@ -47,7 +48,7 @@ import { plates } from '../lib/plates';
     </div>
 
     <div class="mt-16 flex flex-wrap items-center gap-x-10 gap-y-4">
-      <a href="/#photos" class="font-serif italic text-lg fn-serif-link text-ink">
+      <a href={href('/#photos')} class="font-serif italic text-lg fn-serif-link text-ink">
         ← back to the index
       </a>
       <a href="https://www.instagram.com/joseafdlopez/" target="_blank" rel="me noopener noreferrer"

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { href } from '../lib/base';
 
 interface Props {
   title?: string;
@@ -17,7 +18,7 @@ const {
 
 // Astro.site is set in astro.config.mjs and is required for absolute URLs.
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const ogImageURL = new URL(ogImage, Astro.site).toString();
+const ogImageURL = new URL(href(ogImage), Astro.site).toString();
 ---
 
 <!doctype html>
@@ -27,10 +28,10 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
 
     {/* RSS feed for research pieces */}
-    <link rel="alternate" type="application/rss+xml" title="Jose Lopez · Research" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Jose Lopez · Research" href={href('/rss.xml')} />
 
     {/* OpenGraph (Facebook, Slack, iMessage, LinkedIn previews) */}
     <meta property="og:type" content="website" />

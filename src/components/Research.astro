@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SectionHeader from './SectionHeader.astro';
 import { researchRows } from '../lib/research-rows';
+import { href } from '../lib/base';
 
 const rows = researchRows;
 const themeCount = new Set(rows.map((r) => r.group)).size;
@@ -34,7 +35,7 @@ const statusBySlug = new Map(docs.map((d) => [d.id, d.data.status]));
       return (
         <li class={row.hoverBg}>
           {written ? (
-            <a href={`/research/${row.slug}`} class={`${baseGrid} cursor-pointer no-underline text-ink`}>
+            <a href={href(`/research/${row.slug}`)} class={`${baseGrid} cursor-pointer no-underline text-ink`}>
               {inner}
             </a>
           ) : (
