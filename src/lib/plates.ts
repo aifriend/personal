@@ -15,7 +15,7 @@ export interface Plate {
 }
 
 // Titles describe what is actually in each photo. Captions were invented and
-// have been removed — add true ones in your own words later (see AUTHENTICITY-PASS.md).
+// have been removed — add true ones in your own words later.
 // Shared by the homepage Photography section and the /photos gallery page.
 export const plates: Plate[] = [
   {

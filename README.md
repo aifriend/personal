@@ -54,5 +54,6 @@ site served from the `gh-pages` branch of `github.com/aifriend/personal`.
   `site.config.mjs` is set to the real one. With a real domain, deploy at the
   domain root (Netlify/Cloudflare) and the base path becomes unnecessary.
 
-See `AUTHENTICITY-PASS.md` for the content-authenticity audit and open
-editorial decisions.
+**Content policy:** every user-facing string is real and in Jose's voice —
+nothing AI-invented. (The working authenticity audit is kept private, outside
+this repo.)
