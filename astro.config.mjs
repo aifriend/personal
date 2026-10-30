@@ -17,6 +17,9 @@ if (IS_PLACEHOLDER_DOMAIN) {
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
+  // Root-absolute by default; set ASTRO_BASE (e.g. /personal) for subpath deploys
+  // like GitHub Pages project sites. Internal links honor it via src/lib/base.ts.
+  base: process.env.ASTRO_BASE ?? '/',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]

@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import { researchRows } from '../../lib/research-rows';
+import { href } from '../../lib/base';
 
 export async function getStaticPaths() {
   const entries = await getCollection('research');
@@ -105,7 +106,7 @@ const lang = entry.data.lang ?? 'en';
         {(prev || next) && (
           <nav class="mt-20 pt-9 border-t border-ink/13 grid grid-cols-1 sm:grid-cols-2 gap-8" aria-label="Research navigation">
             {prev ? (
-              <a href={`/research/${prev.slug}`} class="group block no-underline text-ink">
+              <a href={href(`/research/${prev.slug}`)} class="group block no-underline text-ink">
                 <div class="font-mono text-[10px] tracking-[0.18em] uppercase opacity-55 mb-2">← previous</div>
                 <div class="font-serif italic text-[22px] leading-[1.2] group-hover:text-accent transition-colors duration-300">
                   {prev.title}
@@ -116,7 +117,7 @@ const lang = entry.data.lang ?? 'en';
               </a>
             ) : <div></div>}
             {next ? (
-              <a href={`/research/${next.slug}`} class="group block no-underline text-ink sm:text-right">
+              <a href={href(`/research/${next.slug}`)} class="group block no-underline text-ink sm:text-right">
                 <div class="font-mono text-[10px] tracking-[0.18em] uppercase opacity-55 mb-2">next →</div>
                 <div class="font-serif italic text-[22px] leading-[1.2] group-hover:text-accent transition-colors duration-300">
                   {next.title}
@@ -130,7 +131,7 @@ const lang = entry.data.lang ?? 'en';
         )}
 
         <div class="mt-12 pt-7 border-t border-ink/13 flex justify-between items-baseline">
-          <a href="/#research" class="font-serif italic text-lg fn-serif-link text-ink">
+          <a href={href('/#research')} class="font-serif italic text-lg fn-serif-link text-ink">
             ← back to the index
           </a>
           {entry.data.updated && (
