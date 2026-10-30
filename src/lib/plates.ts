@@ -14,6 +14,7 @@ import photo10 from '../assets/photos/photo-10.jpg';
 import photo11 from '../assets/photos/photo-11.jpg';
 import photo12 from '../assets/photos/photo-12.jpg';
 import photo13 from '../assets/photos/photo-13.jpg';
+import photo14 from '../assets/photos/photo-14.jpg';
 
 export interface Plate {
   image: ImageMetadata;
@@ -104,6 +105,12 @@ export const plates: Plate[] = [
     image: photo13,
     no: '13',
     title: 'Oleander.',
+    serifSize: 'text-[24px]',
+  },
+  {
+    image: photo14,
+    no: '14',
+    title: 'A spiral topiary.',
     serifSize: 'text-[24px]',
   },
 ];
