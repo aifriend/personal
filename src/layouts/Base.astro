@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Jose Lopez — a personal index',
-  description = 'A personal index of photographs, places, half-finished essays, and notes from the field. Jose Lopez, Madrid.',
+  title = 'Jose Lopez — neuroscience · AI · photography',
+  description = 'Jose Lopez — Madrid-based researcher in neuroscience and artificial intelligence, and photographer. Research notes, open code, and selected photographs.',
   ogImage = '/og-image.png',
   lang = 'en',
 } = Astro.props;
@@ -42,7 +42,7 @@ const ogImageURL = new URL(href(ogImage), Astro.site).toString();
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Jose Lopez — a personal index" />
+    <meta property="og:image:alt" content="Jose Lopez — neuroscience, AI, photography" />
     <meta property="og:site_name" content="Jose Lopez" />
     <meta property="og:locale" content="en_US" />
 

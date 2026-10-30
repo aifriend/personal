@@ -3,12 +3,10 @@ import { href } from '../lib/base';
 
 // Absolute (/#…) so the links also work from /research/* subpages, not just home.
 const links = [
-  { id: 'photos',   href: href('/#photos'),   label: 'photos' },
-  { id: 'places',   href: href('/#places'),   label: 'places' },
-  { id: 'story',    href: href('/#story'),    label: 'story' },
+  { id: 'photos',   href: href('/#photos'),   label: 'photography' },
   { id: 'research', href: href('/#research'), label: 'research' },
   { id: 'works',    href: href('/#works'),    label: 'works' },
-  { id: 'say-hi',   href: href('/#say-hi'),   label: 'say hi' },
+  { id: 'say-hi',   href: href('/#say-hi'),   label: 'contact' },
 ];
 ---
 
@@ -17,7 +15,7 @@ const links = [
     Jose Lopez
     <span class="text-accent mx-1.5">·</span>
     <span class="not-italic font-mono text-[11px] tracking-[0.15em] uppercase opacity-60">
-      a personal index
+      science · photography
     </span>
   </a>
   <nav class="hidden md:flex gap-8 font-mono text-xs tracking-[0.15em] uppercase">
