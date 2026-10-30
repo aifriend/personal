@@ -42,5 +42,17 @@ src/
   social card. The domain drives sitemap, RSS, canonical URLs, OG meta, and
   `robots.txt`.
 
+## Deploy
+
+Live preview: **https://aifriend.github.io/personal/** — a GitHub Pages project
+site served from the `gh-pages` branch of `github.com/aifriend/personal`.
+
+- `npm run deploy` rebuilds with `ASTRO_BASE=/personal` (all internal links are
+  base-aware via `src/lib/base.ts`) and force-pushes `dist/` to `gh-pages`.
+  Live in about a minute.
+- Canonical/OG/sitemap URLs still point at the placeholder domain until
+  `site.config.mjs` is set to the real one. With a real domain, deploy at the
+  domain root (Netlify/Cloudflare) and the base path becomes unnecessary.
+
 See `AUTHENTICITY-PASS.md` for the content-authenticity audit and open
 editorial decisions.

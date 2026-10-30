@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "gen-og": "node scripts/gen-og.mjs"
+    "gen-og": "node scripts/gen-og.mjs",
+    "deploy": "bash scripts/deploy-pages.sh"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
