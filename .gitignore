@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# private working doc — never published
+AUTHENTICITY-PASS.md
+
 # jetbrains setting folder
 .idea/
