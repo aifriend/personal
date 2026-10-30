@@ -1,0 +1,178 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import { researchRows } from '../../lib/research-rows';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('research');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+// Reading time + word count from raw markdown body.
+const wordCount = (entry.body ?? '').trim().split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
+
+// Table of contents: section headings (h2/h3), skipping the article's own h1 title.
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+// Previous / next, in canonical Research index order. Skip slugs with no markdown file.
+const writtenSlugs = new Set((await getCollection('research')).map((d) => d.id));
+const orderedWritten = researchRows.filter((r) => writtenSlugs.has(r.slug));
+const currentIndex = orderedWritten.findIndex((r) => r.slug === entry.id);
+const prev = currentIndex > 0 ? orderedWritten[currentIndex - 1] : null;
+const next = currentIndex >= 0 && currentIndex < orderedWritten.length - 1 ? orderedWritten[currentIndex + 1] : null;
+
+const lang = entry.data.lang ?? 'en';
+---
+
+<Base
+  title={`${entry.data.title} — Jose Lopez`}
+  description={entry.data.summary ?? `${entry.data.group} · ${entry.data.kind}`}
+  lang={lang}
+>
+  <Nav />
+
+  {/* reading progress bar */}
+  <div id="reading-progress" class="fn-progress" aria-hidden="true"></div>
+
+  <main class="relative">
+    <div class={`mx-auto px-8 sm:px-14 pt-[120px] pb-[140px] relative z-10 ${
+      toc.length > 2
+        ? 'max-w-[1160px] xl:grid xl:grid-cols-[210px_minmax(0,720px)] xl:gap-16 xl:justify-center'
+        : 'max-w-[720px]'
+    }`}>
+
+      {toc.length > 2 && (
+        <aside class="mb-14 xl:mb-0 xl:sticky xl:top-[96px] xl:self-start" aria-label="Table of contents">
+          <div class="font-mono text-[10px] tracking-[0.18em] uppercase opacity-50 mb-4">
+            Contents
+          </div>
+          <nav id="toc" class="text-sm">
+            {toc.map((h) => (
+              <a href={`#${h.slug}`} data-toc={h.slug} data-depth={h.depth} class="fn-toc-link font-serif">
+                {h.text}
+              </a>
+            ))}
+          </nav>
+        </aside>
+      )}
+
+      <article lang={lang} class="min-w-0">
+        <div class="font-mono text-[11px] tracking-[0.18em] uppercase opacity-55 mb-8 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span class="block w-7 h-px bg-ink opacity-40"></span>
+          <span>Research · {entry.data.group} · {entry.data.kind}</span>
+          <span class="opacity-50">·</span>
+          <span>{readingMinutes} min read · {wordCount.toLocaleString()} words</span>
+        </div>
+
+        <h1 class="font-serif font-light italic leading-[1.05] -tracking-[0.025em] m-0 mb-10"
+            style="font-size: clamp(44px, 5.5vw, 76px);">
+          {entry.data.title}
+        </h1>
+
+        {entry.data.summary && (
+          <p class="font-serif italic text-2xl leading-[1.5] text-ink-soft m-0 mb-14 -mt-4">
+            {entry.data.summary}
+          </p>
+        )}
+
+        <div class="fn-prose" lang={lang}>
+          <Content />
+        </div>
+
+        {/* prev / next navigation */}
+        {(prev || next) && (
+          <nav class="mt-20 pt-9 border-t border-ink/13 grid grid-cols-1 sm:grid-cols-2 gap-8" aria-label="Research navigation">
+            {prev ? (
+              <a href={`/research/${prev.slug}`} class="group block no-underline text-ink">
+                <div class="font-mono text-[10px] tracking-[0.18em] uppercase opacity-55 mb-2">← previous</div>
+                <div class="font-serif italic text-[22px] leading-[1.2] group-hover:text-accent transition-colors duration-300">
+                  {prev.title}
+                </div>
+                <div class="font-mono text-[10px] tracking-[0.15em] uppercase opacity-50 mt-1.5">
+                  {prev.group} · {prev.kind}
+                </div>
+              </a>
+            ) : <div></div>}
+            {next ? (
+              <a href={`/research/${next.slug}`} class="group block no-underline text-ink sm:text-right">
+                <div class="font-mono text-[10px] tracking-[0.18em] uppercase opacity-55 mb-2">next →</div>
+                <div class="font-serif italic text-[22px] leading-[1.2] group-hover:text-accent transition-colors duration-300">
+                  {next.title}
+                </div>
+                <div class="font-mono text-[10px] tracking-[0.15em] uppercase opacity-50 mt-1.5">
+                  {next.group} · {next.kind}
+                </div>
+              </a>
+            ) : <div></div>}
+          </nav>
+        )}
+
+        <div class="mt-12 pt-7 border-t border-ink/13 flex justify-between items-baseline">
+          <a href="/#research" class="font-serif italic text-lg fn-serif-link text-ink">
+            ← back to the index
+          </a>
+          {entry.data.updated && (
+            <span class="font-mono text-[11px] tracking-[0.15em] uppercase opacity-55">
+              updated {entry.data.updated.toISOString().slice(0, 10)}
+            </span>
+          )}
+        </div>
+      </article>
+    </div>
+  </main>
+</Base>
+
+<script>
+  // Reading progress bar — tracks scroll through the article body.
+  const bar = document.getElementById('reading-progress');
+  const article = document.querySelector('article');
+
+  if (bar && article) {
+    const update = () => {
+      const rect = article.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 0));
+      const ratio = total > 0 ? scrolled / total : 0;
+      bar.style.transform = `scaleX(${ratio})`;
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+  }
+
+  // TOC active-section highlighting via IntersectionObserver.
+  const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc]'));
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    const headingEls = tocLinks
+      .map((l) => document.getElementById(l.dataset.toc!))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const visible = new Set<string>();
+    const setActive = (slug: string | null) => {
+      tocLinks.forEach((l) => l.classList.toggle('fn-toc-active', l.dataset.toc === slug));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target.id);
+          else visible.delete(e.target.id);
+        }
+        // Pick the topmost visible heading in document order.
+        const first = headingEls.find((h) => visible.has(h.id));
+        if (first) setActive(first.id);
+      },
+      { rootMargin: '-90px 0px -70% 0px', threshold: [0, 1] },
+    );
+
+    headingEls.forEach((h) => observer.observe(h));
+  }
+</script>

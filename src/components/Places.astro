@@ -1,0 +1,51 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+// Notes reduced to Jose's own one-word seeds — no invented backstory.
+// `tag` is his real relationship to each place; expand the notes later (Phase 2)
+// with true detail in his words. See AUTHENTICITY-PASS.md.
+const places = [
+  { city: 'Granada, ES',    tag: 'born',    note: 'Where I was born.' },
+  { city: 'Madrid, ES',     tag: 'home',    note: 'Where I live now.' },
+  { city: 'Edinburgh, UK',  tag: 'studied', note: 'Where I studied.' },
+  { city: 'Lima, PE',       tag: 'work',    note: 'Work.' },
+  { city: 'Bordeaux, FR',   tag: 'wine',    note: 'A wine I still remember.' },
+  { city: 'Paris, FR',      tag: 'ateliers',note: 'Fashion ateliers.' },
+  { city: 'Cali, CO',       tag: 'travel',  note: 'Travel, and the coffee.' },
+  { city: 'La Paz, BO',     tag: 'travel',  note: 'Ancient cultures.' },
+  { city: 'Texas, US',      tag: '',        note: 'Eyes.' },
+  { city: 'Cairo, EG',      tag: 'travel',  note: 'The pharaohs.' },
+  { city: 'Marrakech, MA',  tag: 'travel',  note: 'A slower kind of life.' },
+  { city: 'Zurich, CH',     tag: 'dream',   note: 'The one I dream of living in.' },
+];
+
+const tones = ['bg-rose', 'bg-periwinkle', 'bg-sage', 'bg-rose-deep', 'bg-periwinkle-deep'];
+---
+
+<section id="places" class="px-8 sm:px-14 py-[120px] relative z-10">
+  <SectionHeader number="02" label="Places" title="Streets, ateliers," titleBreak="and one bottle." />
+
+  <div class="max-w-[820px]">
+    <p class="font-serif italic text-2xl leading-[1.5] text-ink-soft m-0 mb-12">
+      A list of the places I keep returning to, on purpose,
+      because something there asks me back.
+    </p>
+
+    <ul class="list-none p-0 m-0">
+      {places.map((p, i) => (
+        <li class="fn-place-row grid grid-cols-[50px_1fr_auto] items-center py-6 gap-5">
+          <span class={`w-9 h-9 rounded-full flex items-center justify-center font-serif italic text-sm text-ink ${tones[i % tones.length]}`}>
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div>
+            <div class="font-serif font-normal italic text-[28px] leading-[1.1] mb-1">{p.city}</div>
+            <div class="text-[13px] opacity-70 leading-[1.5]">{p.note}</div>
+          </div>
+          {p.tag && (
+            <span class="font-mono text-[10px] tracking-[0.15em] uppercase opacity-55 text-right">{p.tag}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

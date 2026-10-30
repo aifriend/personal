@@ -1,0 +1,51 @@
+---
+const channels = [
+  ['Email',    'contacto@doctorjosette.com', 'mailto:contacto@doctorjosette.com'],
+  ['Photos',   '@joseafdlopez',              'https://www.instagram.com/joseafdlopez/'],
+  ['Code',     '@aifriend',                  'https://github.com/aifriend'],
+  ['LinkedIn', '@jafdl',                     'https://www.linkedin.com/in/jafdl'],
+];
+---
+
+<section id="say-hi" class="px-8 sm:px-14 pt-[180px] pb-[120px] relative z-10"
+         style="background: linear-gradient(180deg, transparent, var(--color-cream-deep));">
+  <div class="grid lg:grid-cols-2 gap-20">
+    <div>
+      <div class="font-mono text-[11px] tracking-[0.18em] opacity-55 uppercase mb-8 flex items-center gap-3">
+        <span class="block w-7 h-px bg-ink opacity-40"></span>
+        05 — Say Hi
+      </div>
+      <h2 class="font-serif font-light leading-[0.92] m-0 -tracking-[0.025em]"
+          style="font-size: clamp(64px, 9vw, 132px);">
+        Write me a<br />
+        <em class="italic text-accent">letter</em>,<br />
+        slow is fine.
+      </h2>
+      <p class="mt-7 font-serif italic text-xl leading-[1.5] text-ink-soft max-w-[34ch]">
+        I read everything. I usually reply within
+        a week, sometimes longer.
+      </p>
+    </div>
+    <div class="self-end">
+      <ul class="list-none p-0 m-0">
+        {channels.map(([k, v, href]) => (
+          <li>
+            <a href={href}
+               target={href.startsWith('mailto:') || href === '#' ? '_self' : '_blank'}
+               rel="noopener noreferrer"
+               class="fn-contact-row flex justify-between items-baseline py-5.5 no-underline text-ink">
+              <span class="font-mono text-xs tracking-[0.18em] uppercase opacity-65">{k}</span>
+              <span class="font-serif italic text-[26px]">{v}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="px-8 sm:px-14 py-9 text-[11px] tracking-[0.18em] uppercase opacity-55 flex flex-wrap justify-between gap-4 border-t border-ink/13 relative z-10 font-mono">
+  <span>© MMXXVI · Jose Lopez</span>
+  <span>set in Fraunces &amp; Inter</span>
+  <span>made slowly in Madrid</span>
+</footer>

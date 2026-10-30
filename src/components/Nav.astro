@@ -1,0 +1,105 @@
+---
+// Absolute (/#…) so the links also work from /research/* subpages, not just home.
+const links = [
+  { id: 'photos',   href: '/#photos',   label: 'photos' },
+  { id: 'places',   href: '/#places',   label: 'places' },
+  { id: 'story',    href: '/#story',    label: 'story' },
+  { id: 'research', href: '/#research', label: 'research' },
+  { id: 'say-hi',   href: '/#say-hi',   label: 'say hi' },
+];
+---
+
+<header class="sticky top-0 z-50 px-8 sm:px-14 py-7 flex justify-between items-center bg-cream/85 backdrop-blur-md border-b border-ink/10">
+  <a href="/" class="font-serif italic text-[22px] font-normal tracking-tight text-ink no-underline">
+    Jose Lopez
+    <span class="text-accent mx-1.5">·</span>
+    <span class="not-italic font-mono text-[11px] tracking-[0.15em] uppercase opacity-60">
+      a personal index
+    </span>
+  </a>
+  <nav class="hidden md:flex gap-8 font-mono text-xs tracking-[0.15em] uppercase">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        data-navlink={link.id}
+        class="fn-navlink text-ink hover:text-accent transition-colors duration-300 pb-1"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+  <button
+    id="mobile-menu-btn"
+    class="md:hidden p-2 text-ink hover:text-accent"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+  <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 right-0 border-t border-ink/10 bg-cream/95 backdrop-blur-md">
+    <div class="px-8 py-4 flex flex-col gap-4 font-mono text-xs tracking-[0.15em] uppercase">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="text-ink hover:text-accent transition-colors duration-300 mobile-link"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const setMenuOpen = (open: boolean) => {
+    menu?.classList.toggle('hidden', !open);
+    btn?.setAttribute('aria-expanded', String(open));
+  };
+  btn?.addEventListener('click', () => setMenuOpen(menu?.classList.contains('hidden') ?? false));
+  document.querySelectorAll('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenuOpen(false);
+  });
+
+  // Scroll-spy: highlight the nav link for the section currently in view.
+  // Only runs on pages that actually have the sections (i.e. the homepage).
+  const navLinks = Array.from(document.querySelectorAll<HTMLElement>('[data-navlink]'));
+  const sections = navLinks
+    .map((l) => document.getElementById(l.dataset.navlink!))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sections.length > 0 && 'IntersectionObserver' in window) {
+    const setActive = (id: string | null) => {
+      navLinks.forEach((l) =>
+        l.classList.toggle('fn-navlink-active', l.dataset.navlink === id),
+      );
+    };
+
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.set(entry.target.id, entry.intersectionRatio);
+          else visible.delete(entry.target.id);
+        }
+        // Highlight the most-visible section.
+        let best: string | null = null;
+        let bestRatio = 0;
+        visible.forEach((ratio, id) => {
+          if (ratio > bestRatio) { bestRatio = ratio; best = id; }
+        });
+        if (best) setActive(best);
+      },
+      { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.25, 0.5, 1] },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>

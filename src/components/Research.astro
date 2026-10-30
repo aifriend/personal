@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import { researchRows } from '../lib/research-rows';
+
+const rows = researchRows;
+const themeCount = new Set(rows.map((r) => r.group)).size;
+
+// Find which slugs have a real Markdown document
+const docs = await getCollection('research');
+const writtenSlugs = new Set(docs.map((d) => d.id));
+---
+
+<section id="research" class="px-8 sm:px-14 pt-[100px] pb-[120px] relative z-10">
+  <SectionHeader number="04" label="Reading & Notes" title="What I'm" titleBreak="reading." />
+
+  <ul class="list-none p-0 m-0 border-t border-ink/13">
+    {rows.map((row) => {
+      const written = writtenSlugs.has(row.slug);
+      const inner = (
+        <>
+          <span class="font-mono text-[11px] opacity-50 tracking-wider">{row.no}</span>
+          <span class="hidden sm:block font-mono text-[11px] opacity-60 tracking-[0.15em] uppercase">{row.group}</span>
+          <span class="font-serif italic font-normal text-[22px] sm:text-[30px]">{row.title}</span>
+          <span class="hidden sm:block font-mono text-[10px] tracking-[0.15em] uppercase opacity-55">/ {row.kind}</span>
+          <span class="fn-research-arrow text-2xl text-right">{written ? '→' : '·'}</span>
+        </>
+      );
+
+      const baseGrid = `fn-research-row grid grid-cols-[40px_1fr_30px] sm:grid-cols-[60px_180px_1fr_120px_32px] items-baseline py-6 gap-4 sm:gap-6`;
+
+      return (
+        <li class={row.hoverBg}>
+          {written ? (
+            <a href={`/research/${row.slug}`} class={`${baseGrid} cursor-pointer no-underline text-ink`}>
+              {inner}
+            </a>
+          ) : (
+            <div class={`${baseGrid} opacity-70`} title="not yet written">
+              {inner}
+            </div>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+
+  <div class="mt-9">
+    <span class="font-mono text-[11px] tracking-[0.15em] opacity-50 uppercase">
+      {rows.length} entries · {themeCount} themes · ongoing
+    </span>
+  </div>
+</section>
