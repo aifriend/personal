@@ -1,31 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-
-// Auto-stamp "Last update" from the most recent research entry's `updated` date.
-// Falls back to "recently" if no dates are present.
-const entries = await getCollection('research');
-const lastUpdated = entries
-  .map((e) => e.data.updated)
-  .filter((d): d is Date => d instanceof Date)
-  .sort((a, b) => b.getTime() - a.getTime())[0];
-
-function relativeUpdate(d: Date | undefined): string {
-  if (!d) return 'recently';
-  const days = Math.floor((Date.now() - d.getTime()) / 86_400_000);
-  if (days < 1) return 'today';
-  if (days < 2) return 'yesterday';
-  if (days < 7) return `${days} days ago`;
-  if (days < 14) return 'last week';
-  if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
-  if (days < 60) return 'last month';
-  return `${Math.floor(days / 30)} months ago`;
-}
-
-const status = [
-  ['Currently', 'walking around Madrid'],
-  ['Reading', 'The Self-Assembling Brain, Hiesinger'],
-  ['Listening', 'classical, mostly'],
-  ['Last update', relativeUpdate(lastUpdated)],
+// Professional positioning row — facts only, all verifiable (GitHub bio, repos, PhD proposal).
+const facts = [
+  ['Base', 'Madrid, ES'],
+  ['Fields', 'Neuroscience × AI'],
+  ['Research', 'Neural population dynamics — PhD'],
+  ['Practice', 'EEG-BCI · neuroevolution · photography'],
 ];
 ---
 
@@ -34,33 +13,34 @@ const status = [
     <div>
       <div class="font-mono text-[11px] tracking-[0.18em] uppercase opacity-55 mb-8 flex items-center gap-3">
         <span class="block w-7 h-px bg-ink opacity-40"></span>
-        Madrid · Autumn · MMXXVI
+        Madrid, ES — neuroscience × AI × photography
       </div>
       <h1 class="font-serif font-light leading-[0.9] m-0 -tracking-[0.035em] text-ink"
           style="font-size: clamp(72px, 11vw, 172px);">
-        Serenity,<br />
-        courage,<br />
-        and the <em class="italic font-light text-accent">wisdom</em><br />
+        Minds,<br />
+        machines,<br />
+        and the <em class="italic font-light text-accent">photographs</em><br />
         between.
       </h1>
     </div>
     <div class="pb-8">
       <p class="font-serif italic font-light text-[23px] leading-[1.5] text-ink-soft m-0 max-w-[34ch]">
-        An ongoing practice of paying attention — to what to keep,
-        what to change, and what's worth a longer look. Photographs,
-        places I've been slow in, half-finished essays.
+        Jose Lopez is a researcher and photographer based in Madrid.
+        The science: EEG brain–computer interfaces, neuroevolution, and a
+        doctoral project on the geometry of computation in neural populations.
+        The photographs: the same attention, practiced with a camera.
       </p>
       <div class="mt-9 flex items-center gap-4 font-mono text-[11px] tracking-[0.18em] uppercase opacity-70">
         <span class="block w-8 h-px bg-ink opacity-40"></span>
-        <span>scroll, slowly</span>
+        <span>scroll</span>
         <span class="fn-arrow">↓</span>
       </div>
     </div>
   </div>
 
-  {/* live status row */}
+  {/* fact row */}
   <div class="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-8 pt-7 border-t border-ink/13">
-    {status.map(([k, v]) => (
+    {facts.map(([k, v]) => (
       <div>
         <div class="font-mono text-[10px] tracking-[0.18em] uppercase opacity-50 mb-2">{k}</div>
         <div class="font-serif italic text-[18px] font-normal">{v}</div>

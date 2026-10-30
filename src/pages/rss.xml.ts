@@ -16,7 +16,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Jose Lopez · Research',
     description:
-      'Photographs, places, half-finished essays, and longer pieces on attention, the mind, and machines that try to think.',
+      'Research notes on minds, brains, and machines that try to think — with sources and open code. Jose Lopez, Madrid.',
     site: context.site!,
     items: ordered.map((entry) => ({
       title: entry.data.title,

@@ -115,15 +115,6 @@
   transform-origin: left;
 }
 
-/* Place row hover */
-.fn-place-row {
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  border-bottom: 1px solid rgb(36 30 42 / 0.13);
-}
-.fn-place-row:hover {
-  padding-left: 20px;
-}
-
 /* Research row hover */
 .fn-research-row {
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
