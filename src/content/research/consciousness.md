@@ -5,6 +5,7 @@ kind: inquiry
 status: in-progress
 updated: 2026-05-03
 summary: The one I can't put down. Notes on the hardest problem.
+source: the research of Stanislas Dehaene
 ---
 
 # The Ghost in the Machine: 5 Mind-Bending Revelations from the Frontiers of Consciousness Research

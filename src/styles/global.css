@@ -1,3 +1,7 @@
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/fraunces/full-italic.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
 @import "tailwindcss";
 
 @theme {
@@ -15,9 +19,9 @@
   --color-accent: #9a7bb8;
   --color-accent-soft: #b29ad0;
 
-  --font-sans: 'Inter', 'Source Sans 3', system-ui, sans-serif;
-  --font-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --font-sans: 'Inter Variable', 'Inter', 'Source Sans 3', system-ui, sans-serif;
+  --font-serif: 'Fraunces Variable', 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 }
 
 @layer base {

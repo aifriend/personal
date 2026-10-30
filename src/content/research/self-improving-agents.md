@@ -5,6 +5,7 @@ kind: research
 status: in-progress
 updated: 2026-05-03
 summary: On what happens when the thing you're training learns to train itself.
+source: the Google DeepMind Aletheia reporting (Dec 2025)
 ---
 
 # The "Thinking" Machine: 5 Counter-Intuitive Truths from the Frontier of Autonomous Science

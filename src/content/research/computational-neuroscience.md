@@ -5,6 +5,7 @@ kind: course
 status: in-progress
 updated: 2026-05-03
 summary: A working course on how networks of neurons compute. Notes from inside the syllabus.
+code: https://github.com/aifriend/computational_neuroscience
 ---
 
 # Inside the Neural Matrix: 6 Surprising Ways Your Brain Computes Reality

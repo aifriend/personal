@@ -5,6 +5,7 @@ kind: foundation
 status: in-progress
 updated: 2026-05-03
 summary: Going back to the math, slowly, on purpose.
+source: the textbook Mathematics for Machine Learning (Deisenroth, Faisal & Ong, 2020)
 ---
 
 # Why the Math of Machine Learning is Weirder Than You Think: 5 Impactful Insights

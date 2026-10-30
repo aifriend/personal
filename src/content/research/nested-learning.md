@@ -5,6 +5,7 @@ kind: research
 status: in-progress
 updated: 2026-05-03
 summary: When the thing being learned is itself a learning rule.
+source: Google Research's Nested Learning paper (2025)
 ---
 
 # 5 Brain-Inspired Secrets Behind Google's Next AI Revolution
