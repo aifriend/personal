@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joselopez.es/sitemap-index.xml
