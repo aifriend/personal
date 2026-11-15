@@ -21,11 +21,13 @@ static, no client-side framework.
 ```text
 site.config.mjs          ← single source of truth for the production domain
 src/
-├── components/          ← Hero, Photography, Places, Story, Research, Contact, Nav
+├── assets/photos/       ← the photographs (photo-1.jpg … photo-14.jpg)
+├── components/          ← Hero, Works, Photography, Research, Contact, Nav, SectionHeader
 ├── content/research/    ← the long-form pieces (Markdown + frontmatter)
 ├── layouts/Base.astro   ← <head>, meta/OG/Twitter tags, fonts
+├── lib/plates.ts        ← the photo list: image, number, title, optional caption
 ├── lib/research-rows.ts ← canonical order of the research index
-├── pages/               ← index, research/[slug], rss.xml, robots.txt
+├── pages/               ← index, photos, research/[slug], rss.xml, robots.txt
 └── styles/global.css    ← Tailwind theme tokens + editorial prose styles
 ```
 
@@ -35,8 +37,11 @@ src/
   (`title`, `group`, `kind`, `status`, `updated`, `summary`, `lang`) is defined
   in `src/content.config.ts`. Order on the index page comes from
   `src/lib/research-rows.ts`, not the filesystem.
-- **Photos** go in `src/assets/photos/` and are wired up in
-  `src/components/Photography.astro` (Astro generates responsive WebP at build).
+- **Photos** go in `src/assets/photos/` and are listed in `src/lib/plates.ts`:
+  import the image, then add an entry with `no`, `title`, `serifSize` and an
+  optional `caption`. That one list feeds both the homepage
+  (`src/components/Photography.astro`) and the `/photos` gallery page (Astro
+  generates responsive WebP at build).
 - **Before deploying:** set the real domain in `site.config.mjs` and flip
   `IS_PLACEHOLDER_DOMAIN` to `false`, then run `npm run gen-og` to re-stamp the
   social card. The domain drives sitemap, RSS, canonical URLs, OG meta, and
