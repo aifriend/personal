@@ -20,7 +20,9 @@ export async function GET(context: APIContext) {
     site: context.site!,
     items: ordered.map((entry) => ({
       title: entry.data.title,
-      pubDate: entry.data.updated ?? new Date(),
+      // No build-time fallback: an entry without `updated` gets no pubDate,
+      // so the feed does not change on every build.
+      pubDate: entry.data.updated,
       description:
         entry.data.summary ??
         `${entry.data.group} · ${entry.data.kind}`,
