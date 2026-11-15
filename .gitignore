@@ -25,3 +25,6 @@ AUTHENTICITY-PASS.md
 
 # jetbrains setting folder
 .idea/
+
+# AI-assistant session transcripts — never published
+.specstory/
