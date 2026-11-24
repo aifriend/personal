@@ -55,6 +55,18 @@ const ogImageURL = new URL(href(ogImage), Astro.site).toString();
     {/* Fonts are self-hosted via @fontsource-variable packages (see global.css) */}
     <title>{title}</title>
 
+    {/* Night theme: apply before first paint to avoid a flash of the wrong theme.
+        Stored choice wins; otherwise follow the OS. */}
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const dark = stored
+          ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+
     {/* Identity: one person across platforms */}
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',

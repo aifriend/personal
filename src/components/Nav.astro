@@ -3,9 +3,9 @@ import { href } from '../lib/base';
 
 // Absolute (/#…) so the links also work from /research/* subpages, not just home.
 const links = [
-  { id: 'photos',   href: href('/#photos'),   label: 'photography' },
   { id: 'research', href: href('/#research'), label: 'research' },
   { id: 'works',    href: href('/#works'),    label: 'works' },
+  { id: 'photos',   href: href('/#photos'),   label: 'photography' },
   { id: 'say-hi',   href: href('/#say-hi'),   label: 'contact' },
 ];
 ---
@@ -14,11 +14,11 @@ const links = [
   <a href={href('/')} class="font-serif italic text-[22px] font-normal tracking-tight text-ink no-underline">
     Jose Lopez
     <span class="text-accent mx-1.5">·</span>
-    <span class="not-italic font-mono text-[11px] tracking-[0.15em] uppercase opacity-60">
+    <span class="hidden sm:inline not-italic font-mono text-[11px] tracking-[0.15em] uppercase opacity-60">
       science · photography
     </span>
   </a>
-  <nav class="hidden md:flex gap-8 font-mono text-xs tracking-[0.15em] uppercase">
+  <nav class="hidden md:flex gap-8 items-center font-mono text-xs tracking-[0.15em] uppercase">
     {links.map((link) => (
       <a
         href={link.href}
@@ -28,6 +28,10 @@ const links = [
         {link.label}
       </a>
     ))}
+    <button
+      class="theme-toggle text-ink hover:text-accent transition-colors duration-300 uppercase tracking-[0.15em] cursor-pointer"
+      aria-label="Toggle night theme"
+    ></button>
   </nav>
   <button
     id="mobile-menu-btn"
@@ -50,11 +54,31 @@ const links = [
           {link.label}
         </a>
       ))}
+      <button
+        class="theme-toggle text-left text-ink hover:text-accent transition-colors duration-300 uppercase tracking-[0.15em] cursor-pointer"
+        aria-label="Toggle night theme"
+      ></button>
     </div>
   </div>
 </header>
 
 <script>
+  // Night theme toggle — flips data-theme on <html> and persists the choice.
+  const themeToggles = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
+  const syncThemeToggles = () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    themeToggles.forEach((t) => { t.textContent = dark ? 'day' : 'night'; });
+  };
+  themeToggles.forEach((t) => {
+    t.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('theme', next);
+      syncThemeToggles();
+    });
+  });
+  syncThemeToggles();
+
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   const setMenuOpen = (open: boolean) => {

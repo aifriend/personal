@@ -28,3 +28,7 @@ AUTHENTICITY-PASS.md
 
 # AI-assistant session transcripts — never published
 .specstory/
+
+# local tooling
+.claude/settings.local.json
+.codegraph/

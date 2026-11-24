@@ -13,29 +13,27 @@ const works = [
 ---
 
 <section id="works" class="px-8 sm:px-14 pt-[100px] pb-[120px] relative z-10">
-  <SectionHeader number="03" label="Works" title="Built," titleBreak="in public." />
-
-  <ul class="list-none p-0 m-0 border-t border-ink/13">
-    {works.map((w, i) => (
-      <li class="hover:bg-periwinkle/27">
-        <a href={`https://github.com/aifriend/${w.name}`} target="_blank" rel="noopener noreferrer"
-           class="fn-research-row grid grid-cols-[40px_1fr_30px] sm:grid-cols-[60px_1fr_140px_32px] items-baseline py-6 gap-4 sm:gap-6 no-underline text-ink">
-          <span class="font-mono text-[11px] opacity-50 tracking-wider">{String(i + 1).padStart(2, '0')}</span>
-          <span>
-            <span class="font-serif italic font-normal text-[22px] sm:text-[26px]">{w.name}</span>
-            <span class="block font-sans not-italic text-[13px] opacity-70 mt-1 leading-[1.5]">{w.desc}</span>
-          </span>
-          <span class="hidden sm:block font-mono text-[10px] tracking-[0.15em] uppercase opacity-55">{w.lang}</span>
-          <span class="fn-research-arrow text-2xl text-right">→</span>
-        </a>
-      </li>
-    ))}
-  </ul>
-
-  <div class="mt-9 flex flex-wrap justify-between items-baseline gap-4">
-    <span class="font-mono text-[11px] tracking-[0.15em] opacity-50 uppercase">
+  <SectionHeader number="02" label="Works" title="Built," accent="in public.">
+    <span slot="right" class="font-mono text-[11px] tracking-[0.15em] opacity-50 uppercase">
       the pinned 6 · 40 public repos
     </span>
+  </SectionHeader>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
+    {works.map((w, i) => (
+      <a href={`https://github.com/aifriend/${w.name}`} target="_blank" rel="noopener noreferrer"
+         class="group block pt-5 border-t border-ink/40 no-underline text-ink">
+        <div class="flex justify-between items-baseline font-mono text-[10px] tracking-[0.15em] uppercase opacity-60">
+          <span>{String(i + 1).padStart(2, '0')} · {w.lang}</span>
+          <span class="text-[14px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">→</span>
+        </div>
+        <div class="mt-3.5 font-sans font-bold text-[17px] tracking-[-0.01em] group-hover:text-accent transition-colors duration-300">{w.name}</div>
+        <p class="mt-2.5 text-[14px] leading-[1.55] opacity-75 m-0">{w.desc}</p>
+      </a>
+    ))}
+  </div>
+
+  <div class="mt-12">
     <a href="https://github.com/aifriend" target="_blank" rel="me noopener noreferrer"
        class="font-serif italic text-xl fn-serif-link text-ink">
       github.com/aifriend →
